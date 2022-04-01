@@ -83,10 +83,16 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
 		}
     }
 
-   resultsContainer.innerHTML = numCorrect + ' out of ' + questionsAndAnswers.length;
+    getGrades(numCorrect, resultsContainer);
    document.body.append(resultsContainer);
 
 }
+
+let getGrades = (numCorrect, resultsContainer) => {
+    if (numCorrect < 5 ) {resultsContainer.innerHTML = 'Failed ' + numCorrect + ' out of ' + questionsAndAnswers.length; resultsContainer.style.color = 'red'}
+    else if(numCorrect >= 5 && numCorrect < 8) {resultsContainer.innerHTML = 'Passed ' + numCorrect + ' out of ' + questionsAndAnswers.length; resultsContainer.style.color = 'yellow'}
+    else{resultsContainer.innerHTML = 'Well done! ' + numCorrect + ' out of ' + questionsAndAnswers.length; resultsContainer.style.color = 'green'}
+} 
 
 
 document.querySelector("#start").addEventListener("click", () =>{
@@ -94,3 +100,5 @@ document.querySelector("#start").addEventListener("click", () =>{
 
  document.querySelector("#submit").addEventListener("click", () =>{
     renderResults(questionsAndAnswers, questionContainer, resultsContainer);});
+
+
