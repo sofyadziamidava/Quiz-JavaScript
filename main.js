@@ -16,6 +16,7 @@ let getData = async (url) => {
 };
 
 let questionsAndAnswers;
+
 let questionContainer;
 
 let renderQuestions = async () => {
