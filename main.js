@@ -45,26 +45,30 @@ let renderQuestions = async () => {
     questionsAndAnswers = quiz.results;
     let answers;
     let output = [];
+    let allAnwsers;
     questionContainer = document.getElementById("quiz");
     questionContainer.innerHTML = "";
+
     for(var i=0; i<questionsAndAnswers.length; i++){
     let {question} = questionsAndAnswers[i];
   
     answers = [];
-    
-    answers.push(
-        '<label>'
-            + '<input type="radio" name="question'+i+'" value="True">'
-            + true + 
-        '</label>'
-    );
+    allAnwsers = [];
+    let correct_answer = questionsAndAnswers[i].correct_answer;
+    let incorrect_answers = questionsAndAnswers[i].incorrect_answers;
+    incorrect_answers.forEach(answer => allAnwsers.push(answer));
+    allAnwsers.push(correct_answer);
+    shuffleAnswers(allAnwsers);
 
-    answers.push(
+
+    allAnwsers.forEach(answer =>  answers.push(
         '<label>'
-            + '<input type="radio" name="question'+i+'" value="False">'
-            + false + 
-        '</label>'
-    );
+            + '<input type="radio" name="question'+i+'" value="'+answer+'">'
+            + answer  + '</label>'
+    ));
+
+
+
 
     output.push(
         `<div class="questions">  ${question}  </div>` +
@@ -82,6 +86,20 @@ let renderQuestions = async () => {
     document.body.append(questionContainer);
 };
 
+let shuffleAnswers = (array) => {
+    let currentIndex = array.length,  randomIndex;
+  
+    while (currentIndex != 0) {
+
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 let resultsContainer = document.getElementById("results");
 let correctAnswerContainer = document.createElement("div");
@@ -104,10 +122,6 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
         } else{
             correctAnswer = "false";
         }
-
-        console.log("User: " + userAnswer);
-        console.log("Correct: " + correctAnswer);
-        console.log("correct_answer: " + questionsAndAnswers[i].correct_answer)
 
         
 
@@ -135,8 +149,10 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
 
 let getGrades = (numCorrect, resultsContainer) => {
     let labelResult = document.createElement("h3");
-    if (numCorrect < 5 ) {labelResult.innerHTML = 'Failed ' + numCorrect + ' out of ' + questionsAndAnswers.length; labelResult.style.color = 'red'; resultsContainer.append(labelResult);}
-    else if(numCorrect >= 5 && numCorrect < 8) {labelResult.innerHTML = 'Passed ' + numCorrect + ' out of ' + questionsAndAnswers.length; labelResult.style.color = 'yellow'; resultsContainer.append(labelResult);}
+    if (numCorrect < questionsAndAnswers.length / 2 ) 
+    {labelResult.innerHTML = 'Failed ' + numCorrect + ' out of ' + questionsAndAnswers.length; 
+    labelResult.style.color = 'red'; resultsContainer.append(labelResult);}
+    else if(numCorrect >= questionsAndAnswers.length / 2 && numCorrect < (questionsAndAnswers.length / 4) * 3) {labelResult.innerHTML = 'Passed ' + numCorrect + ' out of ' + questionsAndAnswers.length; labelResult.style.color = 'yellow'; resultsContainer.append(labelResult);}
     else{labelResult.innerHTML = 'Well done! ' + numCorrect + ' out of ' + questionsAndAnswers.length; labelResult.style.color = 'green';resultsContainer.append(labelResult);}
 } 
 
