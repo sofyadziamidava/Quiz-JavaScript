@@ -86,10 +86,16 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
 
         if(userAnswer===questionsAndAnswers[i].correct_answer){
 			numCorrect++;
-			answerContainers[i].style.color = 'green';
+            let resultText = document.createElement("p");
+            resultText.innerHTML = "Correct answer!";
+            resultText.style.color = 'green';
+            answerContainers[i].append(resultText);
 		}
 		else{
-			answerContainers[i].style.color = 'red';
+            let resultText = document.createElement("p");
+            resultText.innerHTML = "Wrong answer!";
+            resultText.style.color = 'red';
+            answerContainers[i].append(resultText);
 		}
     }
 
@@ -106,7 +112,9 @@ let getGrades = (numCorrect, resultsContainer) => {
 
 
 document.querySelector("#start").addEventListener("click", () =>{
- renderQuestions();});
+ renderQuestions();
+ resultsContainer.innerHTML = "";
+});
 
  document.querySelector("#submit").addEventListener("click", () =>{
     renderResults(questionsAndAnswers, questionContainer, resultsContainer);});
