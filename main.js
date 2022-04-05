@@ -63,6 +63,7 @@ let renderQuestions = async () => {
 
 let resultsContainer = document.getElementById("results");
 
+
 let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) => {
     var answerContainers = questionContainer.querySelectorAll('.answers');
  
@@ -87,14 +88,18 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
         if(userAnswer===questionsAndAnswers[i].correct_answer){
 			numCorrect++;
             let resultText = document.createElement("p");
+            resultText.innerHTML = "";
             resultText.innerHTML = "Correct answer!";
             resultText.style.color = 'green';
+            answerContainers[i].innerHTML= "";
             answerContainers[i].append(resultText);
 		}
 		else{
             let resultText = document.createElement("p");
+            resultText.innerHTML = "";
             resultText.innerHTML = "Wrong answer!";
             resultText.style.color = 'red';
+            answerContainers[i].innerHTML= "";
             answerContainers[i].append(resultText);
 		}
     }
@@ -114,6 +119,8 @@ let getGrades = (numCorrect, resultsContainer) => {
 document.querySelector("#start").addEventListener("click", () =>{
  renderQuestions();
  resultsContainer.innerHTML = "";
+ let showButton = document.querySelector('#submit');
+ showButton.classList.replace('hidden', 'show');
 });
 
  document.querySelector("#submit").addEventListener("click", () =>{
