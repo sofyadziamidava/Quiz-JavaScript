@@ -13,7 +13,7 @@
 
     <h2>Fun Quiz!</h2>
     <div>
-        <legend for="categories">Categories</legend>
+        <legend for="categories"> <strong> Categories</strong></legend>
         <input type="radio" name="categories" id="9" value="General Knowledge">
         <label for="9">General Knowledge</label>
         <input type="radio" name="categories" id="11" value="Film">
@@ -21,6 +21,33 @@
         <input type="radio" name="categories" id="27" value="Animals">
         <label for="27">Animals</label>
 
+    </div>
+
+    <div>
+        <legend for="difficulty"> <strong> Difficulty</strong></legend>
+        <input type="radio" name="difficulty" id="easy" value="easy">
+        <label for="easy">Easy</label>
+        <input type="radio" name="difficulty" id="medium" value="medium">
+        <label for="medium">Medium</label>
+        <input type="radio" name="difficulty" id="hard" value="hard">
+        <label for="hard">Hard</label>
+
+    </div>
+
+    <div>
+        <legend for="type"> <strong> Type Of Question</strong></legend>
+        <input type="radio" name="type" id="multiple" value="multiple">
+        <label for="multiple">Multiple Choises</label>
+        <input type="radio" name="type" id="true-false" value="boolean">
+        <label for="true-false">True or False</label>
+
+    </div>
+
+
+
+    <div>
+        <label for="amountQuestions">Amount of questions between 1 and 50</label>
+        <input type="number" id="amountQuestions" name="amountQuestions" min="1" max="50"> 
     </div>
 
     <button id="start" >Start Quiz</button>

@@ -1,11 +1,33 @@
 let getData = async (url) => {
-    let categories = document.querySelector("[name = 'categories']:checked").id;
     let queries = "&";
+    let categories = document.querySelector("[name = 'categories']:checked").id;
+    let difficulty = document.querySelector("[name = 'difficulty']:checked").value;
+    let amount = document.querySelector("#amountQuestions").value;
+    let type = document.querySelector("[name = 'type']:checked").value;
 
     if(categories !== null){
         queries += `category=${categories}`;
 
     }
+
+    if(difficulty !== null){
+        if (queries === "&"){
+        queries += `difficulty=${difficulty}`;}
+        else{queries += `&difficulty=${difficulty}`;}
+    }
+
+    if(amount !== null){
+        if (queries === "&"){
+        queries += `amount=${amount}`;}
+        else{queries += `&amount=${amount}`;}
+    }
+
+    if(type !== null){
+        if (queries === "&"){
+        queries += `type=${type}`;}
+        else{queries += `&type=${type}`;}
+    }
+    
 
     console.log(url + queries);
 
