@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Open+Sans:wght@300;400&family=Source+Code+Pro:wght@300&family=Work+Sans&display=swap');
 
 *{
-   
     margin: 0;
     padding: 0;
 }
 
 body{
     font-family: 'Josefin Sans', sans-serif;
-    background: darkblue;
+    background: rgb(218, 161, 231);
     color: #fff;
     line-height: 1.8;
 
@@ -19,23 +18,8 @@ header{
     text-align: center;
     justify-content: center;
     flex-direction: column;
-
-    
 }
 
-button{
-    cursor: pointer;
-    padding: 10px;
-    color: darkblue;
-    background-color: #fff;
-    border: none;
-    margin-bottom: 40px;
-    display: inline;
-    width: 40%;
-    align-self: center;
-    margin-top: 20px;
-
-} 
 
 #quiz{
     display: flex;
@@ -45,16 +29,40 @@ button{
     flex-direction: column;
 }
 
+button{
+    cursor: pointer;
+    padding: 10px;
+    color: darkblue;
+    background-color: #fff;
+    border: none;
+    margin-bottom: 10px;
+    display: inline;
+    width: 40%;
+    align-self: center;
+
+} 
+
+#start{
+    margin-top: 30px;
+}
+
 .hidden{
     display: none;
 }
 
 .show{
     display: block;
+    margin-bottom: 30px;
 }
 
 .flex-result{
     display: flex;
-    text-align: center;
     justify-content: center;
+    text-align: center;
+  
+}
+
+#results{
+  font-weight: 100; 
+  text-align: center;
 }
