@@ -1,6 +1,16 @@
 let getData = async (url) => {
+    let categories = document.querySelector("[name = 'categories']:checked").id;
+    let queries = "&";
+
+    if(categories !== null){
+        queries += `category=${categories}`;
+
+    }
+
+    console.log(url + queries);
+
     fetch(url).then()
-    let response = await fetch(url);
+    let response = await fetch(url + queries);
     let json = response.json();
     return json;
 };
