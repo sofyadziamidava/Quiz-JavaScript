@@ -170,3 +170,15 @@ startUrl = "https://opentdb.com/api.php";
 });
 
 
+var checkbox = document.querySelector("input[name=light-mode]");
+
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    document.body.classList.add('light-mode');
+    document.body.classList.remove('dark-mode');
+  } else {document.body.classList.add('dark-mode')
+  document.body.classList.remove('light-mode');
+    
+  }
+});
+

@@ -7,10 +7,25 @@
 
 body{
     font-family: 'Josefin Sans', sans-serif;
-    background: rgb(218, 161, 231);
-    color: #fff;
     line-height: 1.8;
 
+}
+
+.dark-mode{
+    background: rgb(218, 161, 231);
+    color: #fff;
+}
+
+.light-mode{
+    background:#fff; 
+    color: rgb(218, 161, 231);
+}
+
+#light-mode-container{
+    
+    position: absolute;
+    top: 2px;
+    right: 8px;
 }
 
 header{
