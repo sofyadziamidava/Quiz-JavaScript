@@ -1,38 +1,30 @@
-let getData = async (url) => {
-    let queries = "&";
-    let categories = document.querySelector("[name = 'categories']:checked").id;
-    let difficulty = document.querySelector("[name = 'difficulty']:checked").value;
+let startUrl = "https://opentdb.com/api.php";
+let queries;
+let getValueFromRadioBtns = (name) => {
+let radioValue = document.querySelector(`[name = '${name}']:checked`);
+if(radioValue !== null){
+    queries += `&${name}=${radioValue.id}`;
+}};
+
+let getUrl = () => {
+    queries = "?";
     let amount = document.querySelector("#amountQuestions").value;
-    let type = document.querySelector("[name = 'type']:checked").value;
-
-    if(categories !== null){
-        queries += `category=${categories}`;
-
+    if(amount !== ""){
+        queries += `amount=${amount}`;
+    }else{
+        queries += `amount=10`;
     }
+    getValueFromRadioBtns("category");
+    getValueFromRadioBtns("difficulty");
+    getValueFromRadioBtns("type");
 
-    if(difficulty !== null){
-        if (queries === "&"){
-        queries += `difficulty=${difficulty}`;}
-        else{queries += `&difficulty=${difficulty}`;}
-    }
+    console.log(startUrl + queries);
+    return startUrl + queries;
+};
 
-    if(amount !== null){
-        if (queries === "&"){
-        queries += `amount=${amount}`;}
-        else{queries += `&amount=${amount}`;}
-    }
-
-    if(type !== null){
-        if (queries === "&"){
-        queries += `type=${type}`;}
-        else{queries += `&type=${type}`;}
-    }
-    
-
-    console.log(url + queries);
-
+let getData = async (url) => {
     fetch(url).then()
-    let response = await fetch(url + queries);
+    let response = await fetch(url);
     let json = response.json();
     return json;
 };
@@ -41,13 +33,21 @@ let questionsAndAnswers;
 let questionContainer;
 
 let renderQuestions = async () => {
-    let quiz = await getData("https://opentdb.com/api.php?amount=10&type=boolean");
+    let url = getUrl();
+    let quiz = await getData(url);
     questionsAndAnswers = quiz.results;
     let answers;
     let output = [];
     let allAnwsers;
     questionContainer = document.getElementById("quiz");
     questionContainer.innerHTML = "";
+
+    if(questionsAndAnswers.length === 0){
+        let message = document.getElementById("quiz");
+        message.innerHTML = "Could not find quiz";
+        // document.body.append(message);
+        return;
+    }
 
     for(var i=0; i<questionsAndAnswers.length; i++){
     let {question} = questionsAndAnswers[i];
@@ -115,15 +115,12 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
 
     for(var i=0; i<questionsAndAnswers.length; i++){
         userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-        let correctAnswer;
 
         if(questionsAndAnswers[i].correct_answer){
             correctAnswer = "true";
         } else{
             correctAnswer = "false";
         }
-
-        
 
         if(userAnswer===questionsAndAnswers[i].correct_answer){
 			numCorrect++;
@@ -158,6 +155,7 @@ let getGrades = (numCorrect, resultsContainer) => {
 
 
 document.querySelector("#start").addEventListener("click", () =>{
+startUrl = "https://opentdb.com/api.php";
  renderQuestions();
  resultsContainer.innerHTML = "";
  let showButton = document.querySelector('#submit');
