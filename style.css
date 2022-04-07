@@ -65,10 +65,7 @@ button{
     display: none;
 }
 
-.show{
-    display: block;
-    margin-bottom: 30px;
-}
+
 
 .flex-result{
     display: flex;
@@ -82,3 +79,15 @@ button{
   text-align: center;
 }
 
+.input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#amountQuestions{
+    display: inline;
+    width: 5%;
+    align-self: center;
+}
