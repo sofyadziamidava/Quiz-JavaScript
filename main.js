@@ -18,7 +18,6 @@ let getUrl = () => {
     getValueFromRadioBtns("difficulty");
     getValueFromRadioBtns("type");
 
-    console.log(startUrl + queries);
     return startUrl + queries;
 };
 
@@ -43,9 +42,7 @@ let renderQuestions = async () => {
     questionContainer.innerHTML = "";
 
     if(questionsAndAnswers.length === 0){
-        let message = document.getElementById("quiz");
-        message.innerHTML = "Could not find quiz";
-        // document.body.append(message);
+        questionContainer.innerHTML = "Could not find quiz";
         return;
     }
 
@@ -59,16 +56,13 @@ let renderQuestions = async () => {
     incorrect_answers.forEach(answer => allAnwsers.push(answer));
     allAnwsers.push(correct_answer);
     shuffleAnswers(allAnwsers);
-
+    
 
     allAnwsers.forEach(answer =>  answers.push(
         '<label>'
             + '<input type="radio" name="question'+i+'" value="'+answer+'">'
             + answer  + '</label>'
     ));
-
-
-
 
     output.push(
         `<div class="questions">  ${question}  </div>` +
@@ -116,7 +110,6 @@ let renderResults = (questionsAndAnswers, questionContainer, resultsContainer) =
     for(var i=0; i<questionsAndAnswers.length; i++){
         userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
 
-
         if(userAnswer===questionsAndAnswers[i].correct_answer){
 			numCorrect++;
             let resultText = document.createElement("p");
@@ -149,31 +142,25 @@ let getGrades = (numCorrect, resultsContainer) => {
 } 
 
 
-document.querySelector("#start").addEventListener("click", () =>{
-startUrl = "https://opentdb.com/api.php";
+$("#start").on("click", () => {
+ startUrl = "https://opentdb.com/api.php";
  renderQuestions();
  resultsContainer.innerHTML = "";
- let showButton = document.querySelector('#submit');
- showButton.disabled = false;
- showButton.classList.replace('hidden', 'show');
+ $("#submit").disabled = false;
+ $("#submit").show();
 });
 
- document.querySelector("#submit").addEventListener("click", () =>{
+$("#submit").on("click", () => {
     renderResults(questionsAndAnswers, questionContainer, resultsContainer);
-    let resultsBtn = document.querySelector("#submit");
-    resultsBtn.disabled = true;
-});
+    $("#submit").hide();
+   });
 
 
-var checkbox = document.querySelector("input[name=light-mode]");
-
-checkbox.addEventListener('change', function() {
-  if (this.checked) {
-    document.body.classList.add('light-mode');
-    document.body.classList.remove('dark-mode');
-  } else {document.body.classList.add('dark-mode')
-  document.body.classList.remove('light-mode');
-    
-  }
-});
-
+$("#light-mode").on('change', () => {
+    if (document.getElementById('light-mode').checked) {
+        $("body").toggleClass("light-mode").toggleClass("dark-mode");
+        console.log("in if");
+      } else {
+       $("body").toggleClass("dark-mode").toggleClass("light-mode");
+        console.log("in else");
+ } });
