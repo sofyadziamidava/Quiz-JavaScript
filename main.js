@@ -43,6 +43,7 @@ let renderQuestions = async () => {
 
     if(questionsAndAnswers.length === 0){
         questionContainer.innerHTML = "Could not find quiz";
+        $("#submit").hide();
         return;
     }
 
