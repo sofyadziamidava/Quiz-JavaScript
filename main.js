@@ -159,8 +159,9 @@ $("#submit").on("click", () => {
 $("#light-mode").on('change', () => {
     if (document.getElementById('light-mode').checked) {
         $("body").toggleClass("light-mode").toggleClass("dark-mode");
-        console.log("in if");
+        $("button").toggleClass("button-light").toggleClass("button-dark");
       } else {
-       $("body").toggleClass("dark-mode").toggleClass("light-mode");
-        console.log("in else");
+      
+        $("body").toggleClass("dark-mode").toggleClass("light-mode");
+        $("button").toggleClass("button-dark").toggleClass("button-light");
  } });
